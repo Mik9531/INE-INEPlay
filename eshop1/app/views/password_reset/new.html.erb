@@ -1,0 +1,10 @@
+
+<%= form_tag :action => 'create' do %>
+  <div class="field">
+	<p><label for="email">Correo</label><br/>
+	<%= text_field_tag 'email' %></p>
+  </div>
+<%=submit_tag'Enviar email'%>
+<% end %>
+
+<%= link_to 'Catálogo', :controller => 'catalog' %>

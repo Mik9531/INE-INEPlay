@@ -1,0 +1,19 @@
+<h2>por <%=@game.developer.name %></h2>
+<% if @game.cover_image.exists? then %>
+  <dd><%= image_tag @game.cover_image.url %></dd>
+<% else %>
+  <p>Imagen de portada no disponible.</p>
+<% end %>
+<dl>
+  <dt>Precio</dt>
+
+  <dd><%= sprintf("%.2f €", @game.price) %> </dd>
+  <dt>PEGI</dt>
+  <dd><%= @game.pegi %></dd>
+  <dt>Proveedores</dt>
+  <dd><%= @game.supplier_names %></dd>
+  <dt>Descripción</dt>
+  <%= RedCloth.new(@game.blurb).to_html.html_safe if @game.blurb %>
+</dl>
+
+<p><%= link_to 'Catálogo', :action => 'index' %> </p>

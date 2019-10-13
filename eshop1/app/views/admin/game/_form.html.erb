@@ -1,0 +1,58 @@
+<% if @game.errors.any? %>
+  <div id="errorExplanation">
+  <h2>Este juego no se puede guardar debido a <%= pluralize(@game.errors.count, "error", "errores") %>:</h2>
+    <ul>
+      <% @game.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <p><label for="game_name">Nombre</label><br/>
+  <%= text_field 'game', 'name' %></p>
+</div>
+
+<div class="field">
+  <p><label for="game_developer">Desarrollador</label><br/>
+  <%= collection_select :game, :developer_id, @developers, :id, :name %></p>
+</div>
+  
+<div class="field">
+  <p><label for="game[supplier_ids][]">Proveedores</label><br/>
+  <%= select_tag 'game[supplier_ids][]', options_from_collection_for_select(@suppliers, :id, :name, 
+      @game.suppliers.collect{|supplier| supplier.id}), { :multiple => true, :size => 5 } %></p>
+</div>
+
+<div class="field"><p>
+  <label for="game_developed_at">Desarrollado el</label><br/>
+  <%= datetime_select 'game', 'developed_at' %></p>
+</div>
+
+
+<div class="field">
+  <p><label for="game_blurb">Descripción</label><br/>
+  <%= text_area 'game', 'blurb' %></p>
+</div>
+
+<div class="field">
+  <p><label for="game_pegi">PEGI</label><br/>
+  <%= text_field 'game', 'pegi' %></p>
+</div>
+
+<div class="field">
+  <p><label for="game_price">Precio</label><br/>
+  <%= text_field 'game', 'price' %></p>
+</div>
+
+
+<div class="field">
+  <% if @game.cover_image.exists? then %>
+    <dd><%= image_tag @game.cover_image.url %></dd>
+  <% else %>
+    <p> No hay imagen de portada. Por favor, adjunte una. </p>
+  <% end %>
+  <p><label for="game_cover_image">Imagen de portada</label><br/>
+  <%= file_field 'game', :cover_image %></p>
+</div>

@@ -1,0 +1,7 @@
+<%= form_tag "/admin/game/update?id=#{@game.id}", :multipart => true do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Actualizar juego' %>
+<% end %>
+
+<%= link_to 'Mostrar', :action => 'show', :id => @game %> |
+<%= link_to 'Atrás', :action => 'index' %>

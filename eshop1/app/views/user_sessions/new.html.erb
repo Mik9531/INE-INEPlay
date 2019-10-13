@@ -1,0 +1,6 @@
+<%= form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Iniciar sesión' %>
+<% end %>
+
+<%= link_to 'No me acuerdo de mi contraseña', :controller => 'password_reset', :action => 'new' %>

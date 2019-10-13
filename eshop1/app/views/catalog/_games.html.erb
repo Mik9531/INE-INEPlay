@@ -1,0 +1,15 @@
+<dl id = 'games'>
+  <% for game in @games %>
+    <dt>
+      <%= link_to game.name, :action => 'show', :id => game %>
+      <%= link_to '+', :controller => 'cart', :action => 'add', :id => game, :remote => true %>
+    </dt>
+    <dd><%= game.developer.name %></dd>
+    <dd><%= sprintf("Precio: %.2f €", game.price) %> </dd>
+    <dd><small>Proveedores:
+    <% for supplier in game.suppliers %>
+      <%= supplier.last_name %>, <%= supplier.first_name %>.
+    <% end %>
+    </small></dd>
+    <% end %>
+</dl>

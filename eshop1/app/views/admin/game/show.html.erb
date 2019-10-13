@@ -1,0 +1,26 @@
+<dl>
+  <dt>Nombre</dt>
+  <dd><%= @game.name %></dd>
+  <dt>Desarrollador</dt>
+  <dd><%= @game.developer.name %></dd>
+  <dt>Desarrollado el el</dt>
+  <dd><%= @game.developed_at.strftime("%d/%m/%Y a las %I:%M%p") %></dd>
+  <dt>Proveedor</dt>
+  <dd><%= @game.supplier_names %></dd>
+  <dt>Descripción</dt>
+  <%= RedCloth.new(@game.blurb).to_html.html_safe if @game.blurb %>
+  <dt>PEGI</dt>
+  <dd><%= @game.pegi %></dd>
+  <dt>Precio</dt>
+  <dd><%= @game.price %></dd>
+  <dt>Imagen de portada</dt>
+  <% if @game.cover_image.exists? then %>
+    <dd><%= image_tag @game.cover_image.url %></dd>
+  <% else %>
+    <dd><%= image_tag '/missing.png' %></dd>
+    <p> No hay imagen de portada. Por favor, adjunte una. </p>
+  <% end %>
+</dl>
+
+<%= link_to 'Editar', :action => 'edit', :id => @game %> |
+<%= link_to 'Atrás', :action => 'index' %>

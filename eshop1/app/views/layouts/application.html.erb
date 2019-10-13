@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @page_title || 'INEPlay' %></title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <div id="header">
+    <h1 id="logo">INEPlay&trade;</h1>
+    <h2 id="slogan">Videojuegos sobre Railes</h2>
+     <% if current_user %>
+      <p id="loginlogout">
+        Identificado como <%= current_user.login %>
+        (<%= link_to "Editar cuenta", :controller => '/user', :action => :show %>)
+        <br/>
+        (<%= link_to "Cerrar sesión", :controller => '/user_sessions', :action => :destroy %>)
+      </p>
+    <% else %>
+      <p id="loginlogout">
+        <% if User.count == 0 %>
+          (<%= link_to "Crear nueva cuenta", :controller => '/user', :action => :new %>)
+        <% else %>
+          (<%= link_to "Iniciar sesión", :controller => '/user_sessions', :action => :new %>)
+        <% end %>
+      </p>
+    <% end %>
+   </div>
+
+  <div id="menu">
+    <ul>
+      <li><a href="/admin/developer">Desarrolladores</a>&nbsp;|&nbsp;</li>
+      <li><a href="/admin/supplier">Proveedores</a>&nbsp;|&nbsp;</li>
+      <li><a href="/admin/game">Juegos</a>&nbsp;|&nbsp;</li>
+      <li><a href="/admin/order">Pedidos</a>&nbsp;|&nbsp;</li>
+      <li><a href="/">Catálogo</a>&nbsp;|&nbsp;</li>
+      <li><a href="/about">Sobre INEPlay</a>&nbsp;</li>
+    </ul>
+  </div>
+
+  <div id="content">
+    <h1><%= @page_title if @page_title %></h1>
+    <% if flash[:notice] %>
+      <div id="notice"><%= flash[:notice] %></div>
+    <% end %>
+    <%= yield %>
+  </div>
+
+  <% if @cart %>
+    <div id="shopping_cart"><%= render :partial => 'cart/cart' %></div>
+  <% end %>
+
+  <div id="footer">
+    &copy; 2015-2019 INEPlay
+  </div>
+</body>
+</html>

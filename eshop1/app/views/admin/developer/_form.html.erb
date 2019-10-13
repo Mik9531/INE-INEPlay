@@ -1,0 +1,15 @@
+<% if @developer.errors.any? %>
+  <div id="errorExplanation">
+  <h2>Este desarrollador no se puede guardar debido a <%= pluralize(@developer.errors.count, "error", "errores") %>:</h2>
+    <ul>
+      <% @developer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <p><label for="developer_name">Nombre</label><br/>
+  <%= text_field 'developer', 'name' %></p>
+</div>

@@ -1,0 +1,6 @@
+<%= form_tag "/admin/game/create", :multipart => true do %>
+  <%= render :partial => 'form' %>   
+  <%= submit_tag 'Crear Juego' %>
+<% end %>
+
+<%= link_to 'Atrás', :action => 'index' %>

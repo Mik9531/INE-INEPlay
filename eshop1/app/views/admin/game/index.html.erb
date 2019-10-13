@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th><a href="?sort_by=developer_id">Desarrollador</a></th>
+    <th><a href="?sort_by=name">Nombre</a></th>
+    <th><a href="?sort_by=pegi">PEGI</a></th>
+    <th colspan="3"></th>
+  </tr>
+
+<% @games.each do |game| %>
+  <tr>
+    <td><%= h game.developer.name %></td>
+    <td><%= h game.name %></td>
+    <td><%= h game.pegi %></td>
+    <td><%= link_to 'Mostrar', :action => 'show', :id => game %></td>
+    <td><%= link_to 'Editar', :action => 'edit', :id => game  %></td>
+    <td><%= button_to 'Eliminar', { :action => 'destroy', :id => game },
+                      data: { confirm: "¿Está seguro de que quiere eliminar el juego #{game.name}?" } %>
+  </tr>
+<% end %>
+</table>
+<br/>
+<%= will_paginate @games, :page_links => false, :link_separator => ' | ',
+                          :previous_label => 'Página anterior', :next_label => 'Página siguiente' %>
+<p><%= link_to 'Añadir un nuevo juego', :action => 'new' %></p>
