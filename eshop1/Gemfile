@@ -58,7 +58,7 @@ gem 'rails-controller-testing', '1.0.2'
 
 gem 'RedCloth', '4.3.2'
 
-gem 'paperclip', '4.3.7'
+gem 'paperclip', '5.2.0'
 
 gem 'will_paginate', '3.1.6'
 
